@@ -1,4 +1,4 @@
-package com.proquest.magnolia.statemgr.utils;
+package com.proquest.magnolia.statemgr.common;
 
 import org.apache.log4j.Logger;
 import org.apache.zookeeper.*;
@@ -6,12 +6,14 @@ import org.apache.zookeeper.data.ACL;
 import org.apache.zookeeper.data.Stat;
 
 import java.io.IOException;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  */
-public abstract class ZKClientBase implements Watcher {
+public class ZKClientBase implements Watcher {
 
   private static final Logger logger = Logger.getLogger(ZKClientBase.class);
 
@@ -20,6 +22,7 @@ public abstract class ZKClientBase implements Watcher {
   private long retryDelay = 500L;
   private int retryCount = 10;
   private List<ACL> acl = ZooDefs.Ids.OPEN_ACL_UNSAFE;
+  private Set<Watcher> watchers = new HashSet<Watcher>();
 
   public ZKClientBase(String zkConnection) throws IOException {
     this.zookeeper = new ZooKeeper(zkConnection, 30000, this);
@@ -71,20 +74,22 @@ public abstract class ZKClientBase implements Watcher {
    * @param node  Node name
    * @param data  Data associated with the node
    */
-  public void setNodeData(String node, String data) throws InterruptedException, KeeperException {
+  public void setData(String node, String data) throws InterruptedException, KeeperException {
+    logger.debug(String.format("Setting node data {node=[%s], data=[%s]}", node, data));
     ensurePathExists(node);
     ensureExists(node, data.getBytes(), ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT);
   }
 
-  public String getNodeData(String node) {
+  public String getData(String node) {
     String desc = "";
     try {
+      logger.debug(String.format("Getting data from node {node=[%s]}", node));
       Stat stat = zookeeper.exists(node, this);
       if (stat != null) {
-        desc = zookeeper.getData(node, this, stat).toString();
+        desc = new String(zookeeper.getData(node, this, stat));
       }
     } catch (Exception e) {
-      logger.error("", e);
+      logger.error(String.format("Error getting data from node {node=[%s]}", node), e);
     }
     return desc;
   }
@@ -136,8 +141,7 @@ public abstract class ZKClientBase implements Watcher {
    * @return object. it needs to be cast to the callee's expected
    * return type.
    */
-  private Object retryOperation(ZooKeeperOperation operation)
-      throws KeeperException, InterruptedException {
+  private Object retryOperation(ZooKeeperOperation operation) throws KeeperException, InterruptedException {
     KeeperException exception = null;
     for (int i = 0; i < retryCount; i++) {
       try {
@@ -179,7 +183,19 @@ public abstract class ZKClientBase implements Watcher {
     }
   }
 
+  public void addWatch(Watcher watcher) {
+    watchers.add(watcher);
+  }
+  
+  @Override
+  public void process(WatchedEvent event) {
+    for (Watcher w : watchers) {
+      w.process(event);
+    }
+  }
+
   /**
+   *
    */
   public interface ZooKeeperOperation {
 

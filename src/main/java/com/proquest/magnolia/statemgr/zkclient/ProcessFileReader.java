@@ -13,33 +13,41 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by IntelliJ IDEA.
- * User: TBonghi
- * Date: 5/8/12
- * Time: 3:41 PM
- * To change this template use File | Settings | File Templates.
+ * Reads in the client process file to allow access to a list of ZKProcess objects.
  */
 public class ProcessFileReader {
 
-  private List<ZKProcess> processes = new ArrayList<ZKProcess>();
-  private ZKProcess currProcess = null;
+  private List<ZKProcess> zkProcesses = new ArrayList<ZKProcess>();
+  private ZKProcess currProc = null;
   private SaxNode currNode = SaxNode.None;
   private enum SaxNode { None, Path, Args, Type, Node, DependencyNode};
   
   public ProcessFileReader() {
   }
 
+  /**
+   * Reads the client process input file containing the list of processes to be triggered
+   * when state changes occur.
+   *
+   * @param processCfgFile  The process definition file.
+   *
+   * @return  A list of ZKProcess objects read from the input XML file.
+   *
+   * @throws IOException
+   * @throws SAXException
+   * @throws ParserConfigurationException
+   */
   public List<ZKProcess> read(String processCfgFile) throws IOException, SAXException, ParserConfigurationException {
     
     // Parses the process file
     SAXParser saxParser  = SAXParserFactory.newInstance().newSAXParser();
     saxParser.parse(new File(processCfgFile), new ProcessCfgHandler());
 
-    return processes;
+    return zkProcesses;
   }
 
   /**
-   * Session activity file processor.
+   * ZKProcess client process configuration file parser handler.
    */
   class ProcessCfgHandler extends DefaultHandler {
 
@@ -52,8 +60,8 @@ public class ProcessFileReader {
       super.startElement(uri, localName, qName, attributes);
 
       if ("process".equalsIgnoreCase(qName)) {
-        currProcess = new ZKProcess();
-        processes.add(currProcess);
+        currProc = new ZKProcess();
+        zkProcesses.add(currProc);
       } else if ("path".equalsIgnoreCase(qName)) {
         currNode = SaxNode.Path;        
       } else if ("args".equalsIgnoreCase(qName)) {
@@ -67,30 +75,39 @@ public class ProcessFileReader {
       }
     }
 
+    /**
+     * Updates the current ZKProcess object with the data from the
+     * currently active Sax node.
+     *
+     * @param ch      The data
+     * @param start   Start offset of the data
+     * @param length  Data length
+     * @throws SAXException
+     */
+    @Override
     public void characters(char ch[], int start, int length) throws SAXException {
       
       String data = new String(ch, start, length);
 
       switch (currNode) {
         case Args:
-          currProcess.setArgs(data);
+          currProc.setArgs(data);
           break;
         case Path:
-          currProcess.setProcessPath(data);
+          currProc.setProcessPath(data);
           break;
         case Type:
-          currProcess.setProcessType(ZKProcess.ProcessType.Java);
+          currProc.setProcessType(ZKProcess.ProcessType.Java);
           break;
         case Node:
-          currProcess.setNode(data);
+          currProc.setNode(data);
           break;
         case DependencyNode:
-          currProcess.setDependencyNode(data);
+          currProc.setDependencyNode(data);
           break;
         case None:
           break;
       }
-
       currNode = SaxNode.None;
     }
   }

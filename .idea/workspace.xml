@@ -19,7 +19,7 @@
   </component>
   <component name="DebuggerManager">
     <line_breakpoints>
-      <breakpoint url="file://$PROJECT_DIR$/src/main/java/com/proquest/magnolia/statemgr/zkmaster/ZKMaster.java" line="61" class="com.proquest.magnolia.statemgr.zkmaster.ZKMaster" package="com.proquest.magnolia.statemgr.zkmaster">
+      <breakpoint url="file://$PROJECT_DIR$/src/main/java/com/proquest/magnolia/statemgr/common/ZKClientBase.java" line="132" class="com.proquest.magnolia.statemgr.common.ZKClientBase" package="com.proquest.magnolia.statemgr.common">
         <option name="ENABLED" value="true" />
         <option name="LOG_ENABLED" value="false" />
         <option name="LOG_EXPRESSION_ENABLED" value="false" />
@@ -32,7 +32,7 @@
         <option name="CONDITION" value="" />
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
-      <breakpoint url="file://$PROJECT_DIR$/src/main/java/com/proquest/magnolia/statemgr/utils/ZKClientBase.java" line="127" class="com.proquest.magnolia.statemgr.utils.ZKClientBase" package="com.proquest.magnolia.statemgr.utils">
+      <breakpoint url="file://$PROJECT_DIR$/src/main/java/com/proquest/magnolia/statemgr/common/ZKClientBase.java" line="134" class="com.proquest.magnolia.statemgr.common.ZKClientBase" package="com.proquest.magnolia.statemgr.common">
         <option name="ENABLED" value="true" />
         <option name="LOG_ENABLED" value="false" />
         <option name="LOG_EXPRESSION_ENABLED" value="false" />
@@ -45,7 +45,7 @@
         <option name="CONDITION" value="" />
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
-      <breakpoint url="file://$PROJECT_DIR$/src/main/java/com/proquest/magnolia/statemgr/utils/ZKClientBase.java" line="129" class="com.proquest.magnolia.statemgr.utils.ZKClientBase" package="com.proquest.magnolia.statemgr.utils">
+      <breakpoint url="file://$PROJECT_DIR$/src/main/java/com/proquest/magnolia/statemgr/zkclient/ProcessRunnerMgr.java" line="53" class="com.proquest.magnolia.statemgr.zkclient.ProcessRunnerMgr" package="com.proquest.magnolia.statemgr.zkclient">
         <option name="ENABLED" value="true" />
         <option name="LOG_ENABLED" value="false" />
         <option name="LOG_EXPRESSION_ENABLED" value="false" />
@@ -58,7 +58,7 @@
         <option name="CONDITION" value="" />
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
-      <breakpoint url="file://$PROJECT_DIR$/src/main/java/com/proquest/magnolia/statemgr/utils/ZKClientBase.java" line="121" class="com.proquest.magnolia.statemgr.utils.ZKClientBase$1" package="com.proquest.magnolia.statemgr.utils">
+      <breakpoint url="file://$PROJECT_DIR$/src/main/java/com/proquest/magnolia/statemgr/zkclient/ProcessRunner.java" line="47" class="com.proquest.magnolia.statemgr.zkclient.ProcessRunner" package="com.proquest.magnolia.statemgr.zkclient">
         <option name="ENABLED" value="true" />
         <option name="LOG_ENABLED" value="false" />
         <option name="LOG_EXPRESSION_ENABLED" value="false" />
@@ -71,7 +71,7 @@
         <option name="CONDITION" value="" />
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
-      <breakpoint url="file://$PROJECT_DIR$/src/main/java/com/proquest/magnolia/statemgr/utils/ZKClientBase.java" line="75" class="com.proquest.magnolia.statemgr.utils.ZKClientBase" package="com.proquest.magnolia.statemgr.utils">
+      <breakpoint url="file://$PROJECT_DIR$/src/main/java/com/proquest/magnolia/statemgr/zkclient/ProcessRunner.java" line="89" class="com.proquest.magnolia.statemgr.zkclient.ProcessRunner" package="com.proquest.magnolia.statemgr.zkclient">
         <option name="ENABLED" value="true" />
         <option name="LOG_ENABLED" value="false" />
         <option name="LOG_EXPRESSION_ENABLED" value="false" />
@@ -84,7 +84,7 @@
         <option name="CONDITION" value="" />
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
-      <breakpoint url="file://$PROJECT_DIR$/src/main/java/com/proquest/magnolia/statemgr/utils/ZKClientBase.java" line="119" class="com.proquest.magnolia.statemgr.utils.ZKClientBase$1" package="com.proquest.magnolia.statemgr.utils">
+      <breakpoint url="file://$PROJECT_DIR$/src/main/java/com/proquest/magnolia/statemgr/zkclient/DataMonitor.java" line="99" class="com.proquest.magnolia.statemgr.zkclient.DataMonitor" package="com.proquest.magnolia.statemgr.zkclient">
         <option name="ENABLED" value="true" />
         <option name="LOG_ENABLED" value="false" />
         <option name="LOG_EXPRESSION_ENABLED" value="false" />
@@ -97,7 +97,59 @@
         <option name="CONDITION" value="" />
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
-      <breakpoint url="file://$PROJECT_DIR$/src/main/java/com/proquest/magnolia/statemgr/zkclient/ZKClient.java" line="28" class="com.proquest.magnolia.statemgr.zkclient.ZKClient" package="com.proquest.magnolia.statemgr.zkclient">
+      <breakpoint url="file://$PROJECT_DIR$/src/main/java/com/proquest/magnolia/statemgr/zkclient/ProcessRunnerMgr.java" line="83" class="com.proquest.magnolia.statemgr.zkclient.ProcessRunnerMgr" package="com.proquest.magnolia.statemgr.zkclient">
+        <option name="ENABLED" value="true" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="false" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+      <breakpoint url="file://$PROJECT_DIR$/src/main/java/com/proquest/magnolia/statemgr/zkclient/ProcessRunner.java" line="63" class="com.proquest.magnolia.statemgr.zkclient.ProcessRunner" package="com.proquest.magnolia.statemgr.zkclient">
+        <option name="ENABLED" value="true" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="false" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+      <breakpoint url="file://$PROJECT_DIR$/src/main/java/com/proquest/magnolia/statemgr/zkclient/ProcessRunner.java" line="52" class="com.proquest.magnolia.statemgr.zkclient.ProcessRunner" package="com.proquest.magnolia.statemgr.zkclient">
+        <option name="ENABLED" value="true" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="false" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+      <breakpoint url="file://$PROJECT_DIR$/src/main/java/com/proquest/magnolia/statemgr/zkclient/DataMonitor.java" line="62" class="com.proquest.magnolia.statemgr.zkclient.DataMonitor" package="com.proquest.magnolia.statemgr.zkclient">
+        <option name="ENABLED" value="true" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="false" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+      <breakpoint url="file://$PROJECT_DIR$/src/main/java/com/proquest/magnolia/statemgr/zkclient/ProcessRunnerMgr.java" line="47" class="com.proquest.magnolia.statemgr.zkclient.ProcessRunnerMgr" package="com.proquest.magnolia.statemgr.zkclient">
         <option name="ENABLED" value="true" />
         <option name="LOG_ENABLED" value="false" />
         <option name="LOG_EXPRESSION_ENABLED" value="false" />
@@ -151,13 +203,43 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
+      <file leaf-file-name="ZKClientBase.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/proquest/magnolia/statemgr/common/ZKClientBase.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="197" column="4" selection-start="5694" selection-end="5694" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#736#745#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ZKConstants.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/proquest/magnolia/statemgr/common/ZKConstants.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="3" column="44" selection-start="96" selection-end="96" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="ZKMaster.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/proquest/magnolia/statemgr/zkmaster/ZKMaster.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="30" column="24" selection-start="957" selection-end="957" vertical-scroll-proportion="0.0">
+            <state line="83" column="16" selection-start="2682" selection-end="2682" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ZKProcess.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/proquest/magnolia/statemgr/zkclient/ZKProcess.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="50" column="0" selection-start="1023" selection-end="1023" vertical-scroll-proportion="0.0">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -165,7 +247,7 @@
       <file leaf-file-name="ZKClient.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/proquest/magnolia/statemgr/zkclient/ZKClient.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="29" column="0" selection-start="943" selection-end="943" vertical-scroll-proportion="0.0">
+            <state line="57" column="54" selection-start="1850" selection-end="1850" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -173,10 +255,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Executor.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/proquest/magnolia/statemgr/Executor.java">
+      <file leaf-file-name="ProcessRunnerMgr.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/proquest/magnolia/statemgr/zkclient/ProcessRunnerMgr.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="140" column="24" selection-start="3613" selection-end="3625" vertical-scroll-proportion="0.0">
+            <state line="38" column="55" selection-start="1372" selection-end="1372" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -184,11 +266,14 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ZKProcess.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/proquest/magnolia/statemgr/zkclient/ZKProcess.java">
+      <file leaf-file-name="ProcessRunner.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/proquest/magnolia/statemgr/zkclient/ProcessRunner.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="13" column="15" selection-start="306" selection-end="306" vertical-scroll-proportion="-0.9758065">
-              <folding />
+            <state line="58" column="97" selection-start="1849" selection-end="1849" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="class#StreamWriter#0;class#ProcessRunner#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -196,49 +281,22 @@
       <file leaf-file-name="ProcessFileReader.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/proquest/magnolia/statemgr/zkclient/ProcessFileReader.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="43" column="23" selection-start="1240" selection-end="1240" vertical-scroll-proportion="0.0">
+            <state line="22" column="32" selection-start="699" selection-end="699" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#630#641#0" expanded="true" />
+                <element signature="e#572#583#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SAXParser.class" pinned="false" current="false" current-in-tab="false">
-        <entry file="jar:///System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home/../Classes/classes.jar!/javax/xml/parsers/SAXParser.class">
+      <file leaf-file-name="DataMonitor.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/proquest/magnolia/statemgr/zkclient/DataMonitor.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="25" column="14" selection-start="1526" selection-end="1526" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ZKClientBase.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/proquest/magnolia/statemgr/utils/ZKClientBase.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="94" column="13" selection-start="2439" selection-end="2439" vertical-scroll-proportion="0.0">
+            <state line="21" column="31" selection-start="706" selection-end="735" vertical-scroll-proportion="0.61764705">
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="String.class" pinned="false" current="false" current-in-tab="false">
-        <entry file="jar:///System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home/../Classes/alt-string.jar!/java/lang/String.class">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="96" column="16" selection-start="3484" selection-end="3484" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DataMonitor.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/proquest/magnolia/statemgr/DataMonitor.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="16" column="50" selection-start="545" selection-end="557" vertical-scroll-proportion="0.0">
-              <folding />
             </state>
           </provider>
         </entry>
@@ -258,22 +316,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/com/proquest/magnolia/dashboard/Dashboard.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/proquest/magnolia/dashboard/Executor.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/proquest/magnolia/dashboard/DataMonitor.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/proquest/magnolia/dashboard/com/proquest/magnolia/processmgr/ZKConstants.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/proquest/magnolia/dashboard/com/proquest/magnolia/processmgr/ZKMaster.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/proquest/magnolia/processmgr/com/proquest/magnolia/processmgr/ZKMaster.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/proquest/magnolia/processmgr/ZKMaster.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/proquest/magnolia/processmgr/zkmaster/ZKMaster.java" />
-        <option value="$PROJECT_DIR$/pom.xml" />
-        <option value="/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home/../Classes/classes.jar!/java/lang/Thread.class" />
         <option value="$PROJECT_DIR$/src/main/java/com/proquest/magnolia/statemgr/utils/ZKUtil.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/proquest/magnolia/statemgr/utils/ZKClientBase.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/proquest/magnolia/statemgr/zkmaster/ZKMaster.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/proquest/magnolia/statemgr/zkclient/ZKProcess.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/proquest/magnolia/statemgr/zkclient/ZKClient.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/proquest/magnolia/statemgr/zkclient/ProcessInfo.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/proquest/magnolia/statemgr/utils/ZKConstants.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/proquest/magnolia/statemgr/zkclient/ProcessFileReader.java" />
+        <option value="/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home/../Classes/classes.jar!/java/lang/Runtime.class" />
+        <option value="$PROJECT_DIR$/src/main/java/com/proquest/magnolia/statemgr/zkclient/ZKProcess.java" />
+        <option value="/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home/../Classes/classes.jar!/java/lang/Process.class" />
+        <option value="$PROJECT_DIR$/src/main/java/com/proquest/magnolia/statemgr/zkclient/Executor.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/proquest/magnolia/statemgr/common/ZKClientBase.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/proquest/magnolia/statemgr/common/ZKConstants.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/proquest/magnolia/statemgr/zkmaster/ZKMaster.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/proquest/magnolia/statemgr/zkclient/ProcessRunner.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/proquest/magnolia/statemgr/zkclient/ZKClient.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/proquest/magnolia/statemgr/zkclient/ProcessRunnerMgr.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/proquest/magnolia/statemgr/zkclient/DataMonitor.java" />
       </list>
     </option>
   </component>
@@ -304,8 +362,8 @@
     </treeState>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="1" />
-    <option name="y" value="23" />
+    <option name="x" value="2" />
+    <option name="y" value="22" />
     <option name="width" value="1428" />
     <option name="height" value="821" />
   </component>
@@ -317,34 +375,13 @@
             <id />
           </State>
           <State>
-            <id>Abstraction issues</id>
-          </State>
-          <State>
-            <id>Code maturity issues</id>
-          </State>
-          <State>
-            <id>Code style issues</id>
-          </State>
-          <State>
-            <id>Data flow issues</id>
-          </State>
-          <State>
-            <id>Imports</id>
-          </State>
-          <State>
-            <id>J2ME issues</id>
-          </State>
-          <State>
-            <id>Javadoc issues</id>
-          </State>
-          <State>
-            <id>Logging issues</id>
+            <id>General</id>
           </State>
           <State>
             <id>XPath</id>
           </State>
           <State>
-            <id>toString() issues</id>
+            <id>XSLT</id>
           </State>
         </expanded-state>
       </profile-state>
@@ -483,32 +520,6 @@
               <option name="myItemId" value="statemgr" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="summon-statemgr" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="summon-statemgr" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="statemgr" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="zkmaster" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
@@ -570,7 +581,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="utils" />
+              <option name="myItemId" value="common" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -587,7 +598,7 @@
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="Repository.Attach.JavaDocs" value="false" />
     <property name="recentsLimit" value="5" />
-    <property name="options.lastSelected" value="preferences.editor" />
+    <property name="options.lastSelected" value="Errors" />
     <property name="MemberChooser.sorted" value="false" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="MemberChooser.copyJavadoc" value="false" />
@@ -768,8 +779,8 @@
     <configuration default="false" name="ZKMaster" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="com.proquest.magnolia.statemgr.zkmaster.ZKMaster" />
       <option name="VM_PARAMETERS" value="-Xmx512m" />
-      <option name="PROGRAM_PARAMETERS" value="127.0.0.1:2181 ./config/mastercfg.properties start" />
-      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
+      <option name="PROGRAM_PARAMETERS" value="127.0.0.1:2181 ./mastercfg.properties start" />
+      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$/config" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" value="" />
       <option name="ENABLE_SWING_INSPECTOR" value="false" />
@@ -782,14 +793,16 @@
         <option name="TRANSPORT" value="0" />
         <option name="LOCAL" value="true" />
       </RunnerSettings>
+      <RunnerSettings RunnerId="Run" />
       <ConfigurationWrapper RunnerId="Debug" />
+      <ConfigurationWrapper RunnerId="Run" />
       <method />
     </configuration>
     <configuration default="false" name="ZKClient" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="com.proquest.magnolia.statemgr.zkclient.ZKClient" />
       <option name="VM_PARAMETERS" value="-Xmx512M" />
-      <option name="PROGRAM_PARAMETERS" value="127.0.0.1:2181 ./config/clientcfg.xml" />
-      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
+      <option name="PROGRAM_PARAMETERS" value="127.0.0.1:2181 ./clientcfg.xml" />
+      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$/config" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" value="" />
       <option name="ENABLE_SWING_INSPECTOR" value="false" />
@@ -815,6 +828,9 @@
     </configuration>
   </component>
   <component name="ShelveChangesManager" show_recycled="false" />
+  <component name="StructureViewFactory">
+    <option name="ACTIVE_ACTIONS" value="ALPHA_COMPARATOR" />
+  </component>
   <component name="SvnConfiguration" maxAnnotateRevisions="500">
     <option name="USER" value="" />
     <option name="PASSWORD" value="" />
@@ -881,28 +897,28 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="1" y="23" width="1428" height="821" extended-state="0" />
+    <frame x="2" y="22" width="1428" height="821" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32952926" sideWeight="0.48877624" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Maven-2 Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3292683" sideWeight="0.79460096" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.34472933" sideWeight="0.43849492" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24981897" sideWeight="0.6776034" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.4002849" sideWeight="0.68089724" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.4002849" sideWeight="0.31403762" order="9" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32763532" sideWeight="0.65557164" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3005698" sideWeight="0.62228656" order="9" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24893314" sideWeight="0.1951567" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32952926" sideWeight="0.4858798" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2022792" sideWeight="0.39001447" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3005698" sideWeight="0.37264833" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3293556" sideWeight="0.48166564" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24893314" sideWeight="0.24358974" order="1" side_tool="true" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25325614" sideWeight="0.2079772" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3292683" sideWeight="0.79460096" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39971036" sideWeight="0.6776034" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25325614" sideWeight="0.5997151" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25325614" sideWeight="0.4814815" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32905984" sideWeight="0.48842257" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Atlassian " active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.19543509" sideWeight="0.48877624" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.34472933" sideWeight="0.45867" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
@@ -963,37 +979,9 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://$PROJECT_DIR$/zookeeper-3.3.5.jar!/org/apache/zookeeper/data/Stat.java">
+    <entry file="jar:///System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home/../Classes/alt-string.jar!/java/lang/String.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="13" selection-start="945" selection-end="945" vertical-scroll-proportion="0.2016129">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/zookeeper-3.3.5.jar!/org/apache/zookeeper/CreateMode.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="35" column="4" selection-start="1324" selection-end="1324" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/zookeeper-3.3.5.jar!/org/apache/zookeeper/ZooKeeper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="636" column="0" selection-start="26014" selection-end="26014" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/log4j/log4j/1.2.16/log4j-1.2.16.jar!/org/apache/log4j/Logger.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="40" selection-start="455" selection-end="455" vertical-scroll-proportion="0.3095685">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home/../Classes/classes.jar!/java/lang/Object.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="31" column="17" selection-start="953" selection-end="953" vertical-scroll-proportion="0.0">
+        <state line="96" column="16" selection-start="3484" selection-end="3484" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
@@ -1005,84 +993,118 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar:///System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home/../Classes/alt-string.jar!/java/lang/String.class">
+    <entry file="jar:///System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home/../Classes/classes.jar!/java/lang/Exception.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="96" column="16" selection-start="3484" selection-end="3484" vertical-scroll-proportion="0.0">
+        <state line="5" column="13" selection-start="147" selection-end="147" vertical-scroll-proportion="0.12293144">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/zookeeper-3.3.5.jar!/org/apache/zookeeper/ZooKeeper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="904" column="18" selection-start="36372" selection-end="36372" vertical-scroll-proportion="0.3325792">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/zookeeper-3.3.5.jar!/org/apache/zookeeper/ClientCnxn.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="522" column="0" selection-start="18383" selection-end="18383" vertical-scroll-proportion="0.33333334">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home/../Classes/classes.jar!/sun/nio/ch/KQueueArrayWrapper.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="45" column="21" selection-start="1280" selection-end="1280" vertical-scroll-proportion="0.7234042">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home/../Classes/classes.jar!/java/lang/Thread.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="206" column="22" selection-start="7592" selection-end="7592" vertical-scroll-proportion="0.23902439">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/proquest/magnolia/statemgr/common/ZKClientBase.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="197" column="4" selection-start="5694" selection-end="5694" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#736#745#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/proquest/magnolia/statemgr/common/ZKConstants.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="3" column="44" selection-start="96" selection-end="96" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/proquest/magnolia/statemgr/zkmaster/ZKMaster.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="30" column="24" selection-start="957" selection-end="957" vertical-scroll-proportion="0.0">
+        <state line="83" column="16" selection-start="2682" selection-end="2682" vertical-scroll-proportion="0.0">
           <folding>
             <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/proquest/magnolia/statemgr/utils/ZKClientBase.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="94" column="13" selection-start="2439" selection-end="2439" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/zookeeper-3.3.5.jar!/org/apache/zookeeper/AsyncCallback.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="25" column="14" selection-start="987" selection-end="987" vertical-scroll-proportion="0.17612524">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/proquest/magnolia/statemgr/Executor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="140" column="24" selection-start="3613" selection-end="3625" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/proquest/magnolia/statemgr/DataMonitor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="50" selection-start="545" selection-end="557" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/proquest/magnolia/statemgr/zkclient/ZKClient.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="29" column="0" selection-start="943" selection-end="943" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home/../Classes/classes.jar!/javax/xml/parsers/SAXParser.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="25" column="14" selection-start="1526" selection-end="1526" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/proquest/magnolia/statemgr/zkclient/ProcessFileReader.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="43" column="23" selection-start="1240" selection-end="1240" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#630#641#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/proquest/magnolia/statemgr/zkclient/ZKProcess.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="15" selection-start="306" selection-end="306" vertical-scroll-proportion="-0.9758065">
+        <state line="50" column="0" selection-start="1023" selection-end="1023" vertical-scroll-proportion="0.0">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/proquest/magnolia/statemgr/zkclient/ZKClient.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="57" column="54" selection-start="1850" selection-end="1850" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/proquest/magnolia/statemgr/zkclient/ProcessRunner.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="58" column="97" selection-start="1849" selection-end="1849" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="class#StreamWriter#0;class#ProcessRunner#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/proquest/magnolia/statemgr/zkclient/ProcessFileReader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="22" column="32" selection-start="699" selection-end="699" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#572#583#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/proquest/magnolia/statemgr/zkclient/ProcessRunnerMgr.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="38" column="55" selection-start="1372" selection-end="1372" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/proquest/magnolia/statemgr/zkclient/DataMonitor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="21" column="31" selection-start="706" selection-end="735" vertical-scroll-proportion="0.61764705">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

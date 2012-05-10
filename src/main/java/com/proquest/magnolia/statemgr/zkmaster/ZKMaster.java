@@ -1,6 +1,7 @@
 package com.proquest.magnolia.statemgr.zkmaster;
 
-import com.proquest.magnolia.statemgr.utils.ZKClientBase;
+import com.proquest.magnolia.statemgr.common.ZKClientBase;
+import com.proquest.magnolia.statemgr.common.ZKConstants;
 import org.apache.log4j.Logger;
 import org.apache.zookeeper.KeeperException;
 import org.apache.zookeeper.WatchedEvent;
@@ -62,29 +63,33 @@ public class ZKMaster extends ZKClientBase implements ZKConstants {
     for (Map.Entry<Object,Object> entry : nodeCfg.entrySet()) {
       String node = (String) entry.getKey();
       String desc = (String) entry.getValue();
-      setNodeData(node, "");
-      setNodeData(node + "/Description", desc);
-      if (startMode.equalsIgnoreCase(STATE_START)) {
-        setNodeData(node + "/State", STATE_IDLE);
-        setNodeData(node + "/StateInfo", "");
-        setNodeData(node + "/Timestamp/Start", "");
-        setNodeData(node + "/Timestamp/End", "");
+      setData(node, "");
+      setData(node + "/Description", desc);
+      if (startMode.equalsIgnoreCase(MASTER_STATE_START)) {
+        setData(node + "/State", STATE_IDLE);
+        setData(node + "/StateInfo", "");
+        setData(node + "/Timestamp/Start", "");
+        setData(node + "/Timestamp/End", "");
       }
     }
 
     // Create the master the master node and initialize
-    setNodeData(MASTER_NODE, startMode);
+    setData(MASTER_NODE, startMode);
   }
 
+  /**
+   * Handles events by outputting updates to a log file.
+   * @param event
+   */
   @Override
   public void process(WatchedEvent event) {
-    // 
-    if (!startMode.equalsIgnoreCase(STATE_STOP)) {
+    super.process(event);
+    if (!startMode.equalsIgnoreCase(MASTER_STATE_STOP)) {
       
       String path = event.getPath();
-      String desc = getNodeData(path + "/Description");
-      String state = getNodeData(path + "/State");
-      String stateInfo = getNodeData(path + "StateInfo");
+      String desc = getData(path + "/Description");
+      String state = getData(path + "/State");
+      String stateInfo = getData(path + "StateInfo");
 
       if (state.equals(STATE_ERROR)) {
         logger.error(String.format("%s {%s : %s}", desc, state, stateInfo));

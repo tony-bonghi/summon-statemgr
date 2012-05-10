@@ -1,11 +1,7 @@
 package com.proquest.magnolia.statemgr.zkclient;
 
 /**
- * Created by IntelliJ IDEA.
- * User: TBonghi
- * Date: 5/8/12
- * Time: 3:48 PM
- * To change this template use File | Settings | File Templates.
+ * Represents a process that can be launched by the ZKClient.
  */
 public class ZKProcess {
 

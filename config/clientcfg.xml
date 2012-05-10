@@ -1,16 +1,16 @@
 <Processes>
   <Process>
-  	<path>pathA</path>
-  	<args>args A</args>
-  	<type>type A</type>
-		<node>/prepareIndexers/iad1</node>
-		<dependency>Master/nodeA</dependency>
+  	<path>/Users/TBonghi/source/summon-statemgr/config/processA.sh</path>
+  	<args>argsA</args>
+  	<type>shell</type>
+		<node>/processA</node>
+		<dependency>/Master</dependency>
   </Process>
   <Process>
-  	<path>pathB</path>
-  	<args>args B</args>
-  	<type>type B</type>
-		<node>/prepareIndexers/dfw1</node>
-		<dependency>Master/nodeB</dependency>
+  	<path>/Users/TBonghi/source/summon-statemgr/config/processB.sh</path>
+  	<args>argsB</args>
+  	<type>shell</type>
+		<node>/processB</node>
+		<dependency>/processA</dependency>
   </Process>
 </Processes>

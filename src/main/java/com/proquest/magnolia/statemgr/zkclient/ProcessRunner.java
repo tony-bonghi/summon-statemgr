@@ -6,14 +6,17 @@ import org.apache.log4j.Logger;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 /**
  * Responsible for running the actual process on the machine.
  */
-public class ProcessRunner implements Runnable {
+public class ProcessRunner implements Runnable, ZKConstants {
 
   private static final Logger logger = Logger.getLogger(ProcessRunner.class.getName());
-  
+  private static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
+
   private ZKClientBase zk = null;
   private ZKProcess zkProc = null;
   private Process child = null;
@@ -48,8 +51,9 @@ public class ProcessRunner implements Runnable {
       int retVal = 0;
       
       logger.info(String.format("Starting child process {process=[%s]}", zkProc.getProcessPath()));
-      
-      zk.setData(zkProc.getNode() + "/State", ZKConstants.STATE_INPROGRESS);
+
+      zk.setData(zkProc.getSubNode(NODE_TIME_START), getCurrentDateTime());
+      zk.setData(zkProc.getSubNode(NODE_STATE), STATE_INPROGRESS);
       child = Runtime.getRuntime().exec(zkProc.getProcessPath() + " " + zkProc.getArgs());
       StreamWriter stdOut = new StreamWriter(child.getInputStream());
       StreamWriter stdErr = new StreamWriter(child.getErrorStream());
@@ -60,21 +64,23 @@ public class ProcessRunner implements Runnable {
         retVal = 1;
       }
       child = null;
-      
+      zk.setData(zkProc.getSubNode(NODE_TIME_END), getCurrentDateTime());
+
       if (retVal == 0) {
         logger.info(String.format("Process succeeded { {process=[%s]}", zkProc.getProcessPath()));
-        zk.setData(zkProc.getNode() + "/State", ZKConstants.STATE_SUCCESS);
+        zk.setData(zkProc.getSubNode(NODE_STATE), STATE_SUCCESS);
       } else {
         logger.error(String.format("Process failed { {process=[%s]}", zkProc.getProcessPath()));
-        zk.setData(zkProc.getNode() + "/State", ZKConstants.STATE_ERROR);
+        zk.setData(zkProc.getSubNode(NODE_STATE), STATE_ERROR);
+        zk.setData(NODE_MASTER, MASTER_STATE_STOP);
       }
 
       if (stdErr.getOutput().length() > 0) {
-        zk.setData(zkProc.getNode() + "/StateInfo", stdErr.getOutput());
+        zk.setData(zkProc.getSubNode(NODE_STATE_INFO), stdErr.getOutput());
       }
 
       if (stdOut.getOutput().length() > 0) {
-        zk.setData(zkProc.getNode() + "/StateInfo", stdOut.getOutput());
+        zk.setData(zkProc.getSubNode(NODE_STATE_INFO), stdOut.getOutput());
       }
 
     } catch (Exception e) {
@@ -82,13 +88,17 @@ public class ProcessRunner implements Runnable {
     }
   }
 
+  private static String getCurrentDateTime() {
+    return sdf.format(Calendar.getInstance().getTime());
+  }
+
   /**
    * Stops the client process synchronously if one exists.
    * @param logMessage  A log message
    */
   public void stopProcess(String logMessage) {
+    logger.info(logMessage);
     if (child != null) {
-      logger.info(logMessage);
       child.destroy();
       try {
         child.waitFor();

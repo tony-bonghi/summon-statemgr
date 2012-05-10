@@ -1,5 +1,7 @@
 package com.proquest.magnolia.statemgr.zkclient;
 
+import com.proquest.magnolia.statemgr.common.ZKConstants;
+
 /**
  * Represents a process that can be launched by the ZKClient.
  */
@@ -43,12 +45,33 @@ public class ZKProcess {
     return dependencyNode;
   }
 
+  /**
+   * @return  Returns the current node associated with this process
+   *          with the "/State" appended.
+   */
+  public String getDependencyStateNode() {
+    StringBuilder sb = new StringBuilder(dependencyNode);
+    sb.append(ZKConstants.NODE_STATE);
+    return sb.toString();
+  }
+
   public void setDependencyNode(String dependencyNode) {
     this.dependencyNode = dependencyNode;
   }
 
   public String getNode() {
     return node;
+  }
+
+  /**
+   * @return  Returns the current node associated with this process
+   *          with the specified sub-node appended.
+   * @param subNode
+   */
+  public String getSubNode(String subNode) {
+    StringBuilder sb = new StringBuilder(node);
+    sb.append(subNode);
+    return sb.toString();
   }
 
   public void setNode(String node) {

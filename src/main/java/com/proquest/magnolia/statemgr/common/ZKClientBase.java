@@ -86,7 +86,10 @@ public class ZKClientBase implements Watcher {
       logger.debug(String.format("Getting data from node {node=[%s]}", node));
       Stat stat = zookeeper.exists(node, this);
       if (stat != null) {
-        desc = new String(zookeeper.getData(node, this, stat));
+        byte[] b = zookeeper.getData(node, this, stat);
+        if (b != null) {
+          desc = new String(b);
+        }
       }
     } catch (Exception e) {
       logger.error(String.format("Error getting data from node {node=[%s]}", node), e);
@@ -184,13 +187,17 @@ public class ZKClientBase implements Watcher {
   }
 
   public void addWatch(Watcher watcher) {
-    watchers.add(watcher);
+    synchronized (watchers) {
+      watchers.add(watcher);
+    }
   }
   
   @Override
   public void process(WatchedEvent event) {
-    for (Watcher w : watchers) {
-      w.process(event);
+    synchronized (watchers) {
+      for (Watcher w : watchers) {
+        w.process(event);
+      }
     }
   }
 

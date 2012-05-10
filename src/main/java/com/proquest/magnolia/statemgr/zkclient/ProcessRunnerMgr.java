@@ -21,9 +21,12 @@ public class ProcessRunnerMgr implements Watcher, Runnable, DataMonitor.DataMoni
   private DataMonitor dm;
   private ZKClient zk;
   private ZKProcess zkProc;
-  private String dependencyNodeState = "";
-  
-  enum ProcessState { Idle, InProgress, Success, Error }
+  private MasterProcessState masterState = MasterProcessState.Unknown;
+  private ProcessState dependencyProcessState = ProcessState.Unknown;
+  private ProcessState thisProcessState = ProcessState.Unknown;
+
+  enum ProcessState { Unknown, Idle, InProgress, Success, Error }
+  enum MasterProcessState { Unknown, Started, Stopped }
 
   /**
    * Constructor.
@@ -35,8 +38,7 @@ public class ProcessRunnerMgr implements Watcher, Runnable, DataMonitor.DataMoni
   public ProcessRunnerMgr(ZKClient zk, ZKProcess zkProc) throws KeeperException, IOException {
     this.zk = zk;
     this.zkProc = zkProc;
-    this.dependencyNodeState = zkProc.getDependencyNode()+"/State";
-    this.dm = new DataMonitor(zk, dependencyNodeState, this);
+    this.dm = new DataMonitor(zk, zkProc, this);
     this.zk.addWatch(this);
     this.processRunner = new ProcessRunner(zk, zkProc);
   }
@@ -53,10 +55,8 @@ public class ProcessRunnerMgr implements Watcher, Runnable, DataMonitor.DataMoni
     try {
       synchronized (this) {
         
-        // First test to see if the dependency node state is SUCCESS
-//        String d = zk.getData(dependencyNodeState);
-//        exists(dependencyNodeState, d.getBytes());
-        
+        initProcessStates();
+
         while (!dm.isDead) {
           wait();
         }
@@ -81,31 +81,53 @@ public class ProcessRunnerMgr implements Watcher, Runnable, DataMonitor.DataMoni
 
     String data = (bytes != null) ? new String(bytes) : null;
 
-    if (data == null) {
-      processRunner.stopProcess("Killing child process");
+    if (data != null) {
 
-    } else {
+      // If the Master node, update the master state
+      if (NODE_MASTER.equals(path)) {
+        masterState = getMasterProcessState(data);
 
-      if (MASTER_NODE.equals(dependencyNodeState)) {
-        if (data.equals(MASTER_STATE_START) || data.equals(MASTER_STATE_CONTINUE)) {
-           processRunner.startProcess();
-        }
+      // Update the "dependency" node state
+      } else if (zkProc.getDependencyStateNode().equals(path)) {
+        dependencyProcessState = getProcessState(data);
 
-      } else if (MASTER_NODE.equals(path)) {
-        if (MASTER_STATE_STOP.equals(data)) {
-          processRunner.stopProcess("Stopping child process due to master process node being set to STOP");
-        }
-
-      } else {
-        switch (getProcessState(data)) {
-          case Success:
-            processRunner.startProcess();
-            break;
-          default:
-            processRunner.stopProcess("Stopping child process");
-            break;
-        }
+      // Update this processes node state
+      } else if (zkProc.getSubNode(NODE_STATE).equals(path)) {
+        thisProcessState = getProcessState(data);
       }
+      
+      // Start or stop the process based on the master, dependency, and current node states
+      if (masterState == MasterProcessState.Started) {
+        if ((dependencyProcessState == ProcessState.Success)
+            && (thisProcessState == ProcessState.Idle)) {
+          processRunner.startProcess();
+        }
+      } else {
+        processRunner.stopProcess("Stopping process...");
+      }
+    }
+  }
+
+  /**
+   * Do a one-time initialization of the master, dependency, and current process states.
+   */
+  private void initProcessStates() {
+
+    if (masterState == MasterProcessState.Unknown) {
+      masterState = getMasterProcessState(zk.getData(NODE_MASTER));
+    }
+
+    if (dependencyProcessState == ProcessState.Unknown) {
+      // If a process has the Master as a dependency, need to set it's state based on the master state
+      if (zkProc.getDependencyStateNode().equals(NODE_MASTER)) {
+        dependencyProcessState = (masterState == MasterProcessState.Started) ? ProcessState.Success : ProcessState.Idle;
+      } else {
+        dependencyProcessState = getProcessState(zk.getData(zkProc.getDependencyStateNode()));
+      }
+    }
+
+    if (thisProcessState == ProcessState.Unknown) {
+      thisProcessState = getProcessState(zk.getData(zkProc.getSubNode(NODE_STATE)));
     }
   }
 
@@ -124,7 +146,26 @@ public class ProcessRunnerMgr implements Watcher, Runnable, DataMonitor.DataMoni
       procState = ProcessState.Success;
     } else if (STATE_ERROR.equals(state)) {
       procState = ProcessState.Error;
+    } else {
+      procState = ProcessState.Unknown;
     }
+    return procState;
+  }
+
+  /**
+   * Converts the specified state string to a <code>MasterProcessState</code> enum.
+   * @param state The process state as a string (see ZKConstants)
+   * @return The MasterProcessState enum
+   */
+  private MasterProcessState getMasterProcessState(String state) {
+    MasterProcessState procState = MasterProcessState.Stopped;
+    if (MASTER_STATE_START.equals(state)) {
+      procState = MasterProcessState.Started;
+    } else if (STATE_INPROGRESS.equals(state)) {
+      procState = MasterProcessState.Stopped;
+    } else {
+      procState = MasterProcessState.Unknown;
+   }
     return procState;
   }
 }

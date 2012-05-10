@@ -64,17 +64,19 @@ public class ZKMaster extends ZKClientBase implements ZKConstants {
       String node = (String) entry.getKey();
       String desc = (String) entry.getValue();
       setData(node, "");
-      setData(node + "/Description", desc);
-      if (startMode.equalsIgnoreCase(MASTER_STATE_START)) {
-        setData(node + "/State", STATE_IDLE);
-        setData(node + "/StateInfo", "");
-        setData(node + "/Timestamp/Start", "");
-        setData(node + "/Timestamp/End", "");
+      setData(node + NODE_DESCRIPTION, desc);
+      if (startMode.equals(MASTER_STATE_START)) {
+        setData(node + NODE_STATE, STATE_IDLE);
+        setData(node + NODE_STATE_INFO, "");
+        setData(node + NODE_TIME_START, "");
+        setData(node + NODE_TIME_END, "");
+      } else if (startMode.equals(MASTER_STATE_CONTINUE)) {
+        setData(node + NODE_STATE, STATE_IDLE);
       }
+      // Create the master the master node and initialize
+      String masterState = startMode.equals(MASTER_STATE_STOP) ? MASTER_STATE_STOP : MASTER_STATE_START;
+      setData(NODE_MASTER, masterState);
     }
-
-    // Create the master the master node and initialize
-    setData(MASTER_NODE, startMode);
   }
 
   /**
@@ -87,9 +89,9 @@ public class ZKMaster extends ZKClientBase implements ZKConstants {
     if (!startMode.equalsIgnoreCase(MASTER_STATE_STOP)) {
       
       String path = event.getPath();
-      String desc = getData(path + "/Description");
-      String state = getData(path + "/State");
-      String stateInfo = getData(path + "StateInfo");
+      String desc = getData(path + NODE_DESCRIPTION);
+      String state = getData(path + NODE_STATE);
+      String stateInfo = getData(path + NODE_STATE_INFO);
 
       if (state.equals(STATE_ERROR)) {
         logger.error(String.format("%s {%s : %s}", desc, state, stateInfo));

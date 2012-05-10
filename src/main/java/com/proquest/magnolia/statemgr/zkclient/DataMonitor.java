@@ -17,7 +17,7 @@ public class DataMonitor implements Watcher, StatCallback, ZKConstants {
   private Logger logger = Logger.getLogger(DataMonitor.class.getName());
   
   private ZKClient zk;
-  private String znode;
+  private ZKProcess zkProc;
   private DataMonitorListener listener;
   private String prevData = "";
   boolean isDead;
@@ -25,17 +25,18 @@ public class DataMonitor implements Watcher, StatCallback, ZKConstants {
   /**
    * Constructor.
    * @param zk        ZKClient reference
-   * @param znode     The znode to watch
+   * @param zkProc    The ZK Process object containing the nodes to watch
    * @param listener  The DataMonitorListener used to callback with notifications
    */
-  public DataMonitor(ZKClient zk, String znode, DataMonitorListener listener) {
+  public DataMonitor(ZKClient zk, ZKProcess zkProc, DataMonitorListener listener) {
     this.zk = zk;
-    this.znode = znode;
+    this.zkProc = zkProc;
     this.listener = listener;
     // Get things started by checking if the node exists. We are going
     // to be completely event driven
-    zk.getZookeeper().exists(znode, true, this, null);
-    zk.getZookeeper().exists(MASTER_NODE, true, this, null);
+    zk.getZookeeper().exists(zkProc.getDependencyStateNode(), true, this, null);
+    zk.getZookeeper().exists(zkProc.getSubNode(NODE_STATE), true, this, null);
+    zk.getZookeeper().exists(NODE_MASTER, true, this, null);
   }
 
   /**
@@ -80,10 +81,12 @@ public class DataMonitor implements Watcher, StatCallback, ZKConstants {
       }
     } else {
       // Something has changed on the node, let's find out
-      if (znode.equals(path)) {
-        zk.getZookeeper().exists(znode, true, this, null);
-      } else if (MASTER_NODE.equals(path)) {
-        zk.getZookeeper().exists(MASTER_NODE, true, this, null);
+      if (zkProc.getSubNode(NODE_STATE).equals(path)) {
+        zk.getZookeeper().exists(zkProc.getSubNode(NODE_STATE), true, this, null);
+      } else if (NODE_MASTER.equals(path)) {
+        zk.getZookeeper().exists(NODE_MASTER, true, this, null);
+      } else if (zkProc.getDependencyStateNode().equals(path)) {
+        zk.getZookeeper().exists(zkProc.getDependencyStateNode(), true, this, null);
       }
     }
   }
@@ -115,7 +118,7 @@ public class DataMonitor implements Watcher, StatCallback, ZKConstants {
         return;
       default:
         logger.info("Retry errors");
-        zk.getZookeeper().exists(znode, true, this, null);
+        zk.getZookeeper().exists(zkProc.getSubNode(NODE_STATE), true, this, null);
         return;
     }
 

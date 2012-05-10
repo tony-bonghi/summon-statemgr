@@ -1,16 +1,37 @@
 <Processes>
   <Process>
-  	<path>/Users/TBonghi/source/summon-statemgr/config/processA.sh</path>
+  	<path>/Users/TBonghi/source/summon-statemgr/config/process.sh</path>
   	<args>argsA</args>
   	<type>shell</type>
 		<node>/processA</node>
 		<dependency>/Master</dependency>
   </Process>
   <Process>
-  	<path>/Users/TBonghi/source/summon-statemgr/config/processB.sh</path>
+  	<path>/Users/TBonghi/source/summon-statemgr/config/process.sh</path>
   	<args>argsB</args>
   	<type>shell</type>
 		<node>/processB</node>
 		<dependency>/processA</dependency>
+  </Process>
+  <Process>
+  	<path>/Users/TBonghi/source/summon-statemgr/config/process.sh</path>
+  	<args>argsC</args>
+  	<type>shell</type>
+		<node>/processC</node>
+		<dependency>/processB</dependency>
+  </Process>
+  <Process>
+  	<path>/Users/TBonghi/source/summon-statemgr/config/process.sh</path>
+  	<args>argsD</args>
+  	<type>shell</type>
+		<node>/processD</node>
+		<dependency>/processC</dependency>
+  </Process>
+  <Process>
+  	<path>/Users/TBonghi/source/summon-statemgr/config/process.sh</path>
+  	<args>argsE</args>
+  	<type>shell</type>
+		<node>/processE</node>
+		<dependency>/processD</dependency>
   </Process>
 </Processes>

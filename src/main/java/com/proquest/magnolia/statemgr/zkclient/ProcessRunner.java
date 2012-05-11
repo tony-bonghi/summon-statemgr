@@ -66,6 +66,15 @@ public class ProcessRunner implements Runnable, ZKConstants {
       child = null;
       zk.setData(zkProc.getSubNode(NODE_TIME_END), getCurrentDateTime());
 
+      // Setup any additional logging
+      if (stdErr.getOutput().length() > 0) {
+        zk.setData(zkProc.getSubNode(NODE_STATE_INFO), stdErr.getOutput());
+      }
+      if (stdOut.getOutput().length() > 0) {
+        zk.setData(zkProc.getSubNode(NODE_STATE_INFO), stdOut.getOutput());
+      }
+
+      // Set the SUCCESS or ERROR state
       if (retVal == 0) {
         logger.info(String.format("Process succeeded { {process=[%s]}", zkProc.getProcessPath()));
         zk.setData(zkProc.getSubNode(NODE_STATE), STATE_SUCCESS);
@@ -73,14 +82,6 @@ public class ProcessRunner implements Runnable, ZKConstants {
         logger.error(String.format("Process failed { {process=[%s]}", zkProc.getProcessPath()));
         zk.setData(zkProc.getSubNode(NODE_STATE), STATE_ERROR);
         zk.setData(NODE_MASTER, MASTER_STATE_STOP);
-      }
-
-      if (stdErr.getOutput().length() > 0) {
-        zk.setData(zkProc.getSubNode(NODE_STATE_INFO), stdErr.getOutput());
-      }
-
-      if (stdOut.getOutput().length() > 0) {
-        zk.setData(zkProc.getSubNode(NODE_STATE_INFO), stdOut.getOutput());
       }
 
     } catch (Exception e) {

@@ -1,6 +1,6 @@
-package com.proquest.magnolia.statemgr.zkclient;
+package com.proquest.magnolia.statemgr.common;
 
-import com.proquest.magnolia.statemgr.common.ZKConstants;
+import com.proquest.magnolia.statemgr.zkclient.ZKClient;
 import org.apache.log4j.Logger;
 import org.apache.zookeeper.AsyncCallback.StatCallback;
 import org.apache.zookeeper.KeeperException;
@@ -17,7 +17,7 @@ public class DataMonitor implements Watcher, StatCallback, ZKConstants {
   private Logger logger = Logger.getLogger(DataMonitor.class.getName());
   
   private ZKClient zk;
-  private ZKProcess zkProc;
+  private String[] znodes;
   private DataMonitorListener listener;
   private String prevData = "";
   boolean isDead;
@@ -25,18 +25,18 @@ public class DataMonitor implements Watcher, StatCallback, ZKConstants {
   /**
    * Constructor.
    * @param zk        ZKClient reference
-   * @param zkProc    The ZK Process object containing the nodes to watch
+   * @param znodes    Array of z-nodes to watch
    * @param listener  The DataMonitorListener used to callback with notifications
    */
-  public DataMonitor(ZKClient zk, ZKProcess zkProc, DataMonitorListener listener) {
+  public DataMonitor(ZKClient zk, String[] znodes, DataMonitorListener listener) {
     this.zk = zk;
-    this.zkProc = zkProc;
+    this.znodes = znodes;
     this.listener = listener;
     // Get things started by checking if the node exists. We are going
     // to be completely event driven
-    zk.getZookeeper().exists(zkProc.getDependencyStateNode(), true, this, null);
-    zk.getZookeeper().exists(zkProc.getSubNode(NODE_STATE), true, this, null);
-    zk.getZookeeper().exists(NODE_MASTER, true, this, null);
+    for (String znode : znodes) {
+      zk.getZookeeper().exists(znode, true, this, null);
+    }
   }
 
   /**
@@ -54,6 +54,10 @@ public class DataMonitor implements Watcher, StatCallback, ZKConstants {
      * @param rc  The ZooKeeper reason code
      */
     void closing(int rc);
+  }
+
+  public boolean isDead() {
+    return isDead;
   }
 
   /**
@@ -81,12 +85,10 @@ public class DataMonitor implements Watcher, StatCallback, ZKConstants {
       }
     } else {
       // Something has changed on the node, let's find out
-      if (zkProc.getSubNode(NODE_STATE).equals(path)) {
-        zk.getZookeeper().exists(zkProc.getSubNode(NODE_STATE), true, this, null);
-      } else if (NODE_MASTER.equals(path)) {
-        zk.getZookeeper().exists(NODE_MASTER, true, this, null);
-      } else if (zkProc.getDependencyStateNode().equals(path)) {
-        zk.getZookeeper().exists(zkProc.getDependencyStateNode(), true, this, null);
+      for (String znode : znodes) {
+        if (znode.equals(path)) {
+          zk.getZookeeper().exists(znode, true, this, null);
+        }
       }
     }
   }
@@ -118,7 +120,9 @@ public class DataMonitor implements Watcher, StatCallback, ZKConstants {
         return;
       default:
         logger.info("Retry errors");
-        zk.getZookeeper().exists(zkProc.getSubNode(NODE_STATE), true, this, null);
+        for (String znode : znodes) {
+          zk.getZookeeper().exists(znode, true, this, null);
+        }
         return;
     }
 

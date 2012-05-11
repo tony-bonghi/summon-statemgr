@@ -3,12 +3,15 @@ package com.proquest.magnolia.statemgr.zkmaster;
 import com.proquest.magnolia.statemgr.common.ZKClientBase;
 import com.proquest.magnolia.statemgr.common.ZKConstants;
 import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
 import org.apache.zookeeper.KeeperException;
 import org.apache.zookeeper.WatchedEvent;
 
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
@@ -30,6 +33,7 @@ public class ZKMaster extends ZKClientBase implements ZKConstants {
    */
   public static void main(String[] args) throws Exception {
     if (args.length >= 3) {
+      PropertyConfigurator.configure("./zkmaster-log4j.properties");
       ZKMaster zkMaster = new ZKMaster(args[0], args[1], args[2]);
       zkMaster.execute();
     }
@@ -59,6 +63,13 @@ public class ZKMaster extends ZKClientBase implements ZKConstants {
    */
   public void execute() throws IOException, InterruptedException, KeeperException {
 
+    List<String> znodes = new ArrayList<String>();
+
+    // Create the master the master node and initialize
+    if (startMode.equals(MASTER_STATE_STOP)) {
+      setData(NODE_MASTER, MASTER_STATE_STOP);
+    }
+
     // Create all nodes based on configuration file.
     for (Map.Entry<Object,Object> entry : nodeCfg.entrySet()) {
       String node = (String) entry.getKey();
@@ -73,9 +84,22 @@ public class ZKMaster extends ZKClientBase implements ZKConstants {
       } else if (startMode.equals(MASTER_STATE_CONTINUE)) {
         setData(node + NODE_STATE, STATE_IDLE);
       }
-      // Create the master the master node and initialize
-      String masterState = startMode.equals(MASTER_STATE_STOP) ? MASTER_STATE_STOP : MASTER_STATE_START;
-      setData(NODE_MASTER, masterState);
+
+      // Setup a watch on the nodes
+      zookeeper.exists(node+NODE_STATE, this);
+    }
+
+    // Create the master the master node and initialize
+    if (!startMode.equals(MASTER_STATE_STOP)) {
+      setData(NODE_MASTER, MASTER_STATE_START);
+    }
+
+    byte[] b = new byte[80];
+    while (System.in.read(b) > 0) {
+      String d = new String(b);
+      if (d.startsWith("quit")) {
+        break;
+      }
     }
   }
 
@@ -89,14 +113,26 @@ public class ZKMaster extends ZKClientBase implements ZKConstants {
     if (!startMode.equalsIgnoreCase(MASTER_STATE_STOP)) {
       
       String path = event.getPath();
-      String desc = getData(path + NODE_DESCRIPTION);
-      String state = getData(path + NODE_STATE);
-      String stateInfo = getData(path + NODE_STATE_INFO);
+      if (path != null && path.endsWith(NODE_STATE)) {
+        
+        String rootPath = path.substring(0, path.length() - NODE_STATE.length());
 
-      if (state.equals(STATE_ERROR)) {
-        logger.error(String.format("%s {%s : %s}", desc, state, stateInfo));
-      } else {
-        logger.info(String.format("%s {%s : %s}", desc, state, stateInfo));
+        String desc = getData(rootPath + NODE_DESCRIPTION);
+        String state = getData(rootPath + NODE_STATE);
+        String stateInfo = getData(rootPath + NODE_STATE_INFO);
+
+        String logStr = "";
+        if (stateInfo.length() > 0) {
+          logStr = String.format("[%s] %s (%s : %s)", rootPath, desc, state, stateInfo);
+        } else {
+          logStr = String.format("[%s] %s (%s)", rootPath, desc, state);
+        }
+
+        if (state.equals(STATE_ERROR)) {
+          logger.error(logStr);
+        } else {
+          logger.info(logStr);
+        }
       }
     }
   }

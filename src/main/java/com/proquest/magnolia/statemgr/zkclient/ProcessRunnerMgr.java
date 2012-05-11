@@ -1,5 +1,6 @@
 package com.proquest.magnolia.statemgr.zkclient;
 
+import com.proquest.magnolia.statemgr.common.DataMonitor;
 import com.proquest.magnolia.statemgr.common.ZKConstants;
 import org.apache.log4j.Logger;
 import org.apache.zookeeper.KeeperException;
@@ -38,7 +39,9 @@ public class ProcessRunnerMgr implements Watcher, Runnable, DataMonitor.DataMoni
   public ProcessRunnerMgr(ZKClient zk, ZKProcess zkProc) throws KeeperException, IOException {
     this.zk = zk;
     this.zkProc = zkProc;
-    this.dm = new DataMonitor(zk, zkProc, this);
+
+    String[] znodes = new String[] {zkProc.getDependencyStateNode(), NODE_MASTER, zkProc.getSubNode(NODE_STATE)};
+    this.dm = new DataMonitor(zk, znodes, this);
     this.zk.addWatch(this);
     this.processRunner = new ProcessRunner(zk, zkProc);
   }
@@ -57,7 +60,7 @@ public class ProcessRunnerMgr implements Watcher, Runnable, DataMonitor.DataMoni
         
         initProcessStates();
 
-        while (!dm.isDead) {
+        while (!dm.isDead()) {
           wait();
         }
       }

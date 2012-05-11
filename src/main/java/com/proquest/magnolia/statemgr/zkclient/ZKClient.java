@@ -64,9 +64,14 @@ public class ZKClient extends ZKClientBase {
       t.start();
     }
     
-    // Wait so we stay alive
-    while (true) {
-      Thread.sleep(10000);
+    // Wait for the user to type quit
+    System.out.println("Type quit to stop processing.");
+    byte[] b = new byte[80];
+    while (System.in.read(b) > 0) {
+      String d = new String(b);
+      if (d.startsWith("quit")) {
+        break;
+      }
     }
   }
 }

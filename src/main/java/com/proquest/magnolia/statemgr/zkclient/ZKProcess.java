@@ -2,6 +2,9 @@ package com.proquest.magnolia.statemgr.zkclient;
 
 import com.proquest.magnolia.statemgr.common.ZKConstants;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * Represents a process that can be launched by the ZKClient.
  */
@@ -10,7 +13,8 @@ public class ZKProcess {
   private String processPath = "";
   private String args = "";
   private ProcessType processType = ProcessType.Java;
-  private String dependencyNode = "";
+  private Set<String> dependencyNodes = new HashSet<String>();
+  private Set<String> dependencyStateNodes = new HashSet<String>();
   private String node = "";
 
   enum ProcessType {
@@ -41,24 +45,36 @@ public class ZKProcess {
     this.processType = processType;
   }
 
-  public String getDependencyNode() {
-    return dependencyNode;
+  public Set<String> getDependencyNodes() {
+    return dependencyNodes;
+  }
+
+  public Set<String> getDependencyStateNodes() {
+    return dependencyStateNodes;
   }
 
   /**
    * @return  Returns the current node associated with this process
    *          with the "/State" appended.
    */
-  public String getDependencyStateNode() {
-    StringBuilder sb = new StringBuilder(dependencyNode);
+  private String getDependencyStateNode(String node) {
+    StringBuilder sb = new StringBuilder(node);
     sb.append(ZKConstants.NODE_STATE);
     return sb.toString();
   }
 
-  public void setDependencyNode(String dependencyNode) {
-    this.dependencyNode = dependencyNode;
+  public void setDependencyNodes(Set<String> dependencyNodes) {
+    this.dependencyNodes = dependencyNodes;
+    for (String dn : dependencyNodes) {
+      this.dependencyStateNodes.add(getDependencyStateNode(dn));
+    }
   }
-
+  
+  public void addDependencyNode(String dependencyNode) {
+    this.dependencyNodes.add(dependencyNode);
+    this.dependencyStateNodes.add(getDependencyStateNode(dependencyNode));
+  }
+  
   public String getNode() {
     return node;
   }

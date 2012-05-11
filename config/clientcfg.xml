@@ -18,7 +18,8 @@
   	<args>argsC</args>
   	<type>shell</type>
 		<node>/processC</node>
-		<dependency>/processB</dependency>
+		<dependency>/processB,/Master</dependency>
+		<dependency>/processA</dependency>
   </Process>
   <Process>
   	<path>/Users/TBonghi/source/summon-statemgr/config/process.sh</path>

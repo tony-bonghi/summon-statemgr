@@ -9,6 +9,10 @@ import org.apache.zookeeper.WatchedEvent;
 import org.apache.zookeeper.Watcher;
 import org.apache.zookeeper.data.Stat;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 /**
  * Monitors the data and existence of a zk node.
  */
@@ -17,9 +21,9 @@ public class DataMonitor implements Watcher, StatCallback, ZKConstants {
   private Logger logger = Logger.getLogger(DataMonitor.class.getName());
   
   private ZKClient zk;
-  private String[] znodes;
+  private List<String> znodes;
   private DataMonitorListener listener;
-  private String prevData = "";
+  private Map<String,String> prevPathDataMap = new HashMap<String, String>();
   boolean isDead;
 
   /**
@@ -28,7 +32,7 @@ public class DataMonitor implements Watcher, StatCallback, ZKConstants {
    * @param znodes    Array of z-nodes to watch
    * @param listener  The DataMonitorListener used to callback with notifications
    */
-  public DataMonitor(ZKClient zk, String[] znodes, DataMonitorListener listener) {
+  public DataMonitor(ZKClient zk, List<String> znodes, DataMonitorListener listener) {
     this.zk = zk;
     this.znodes = znodes;
     this.listener = listener;
@@ -46,7 +50,7 @@ public class DataMonitor implements Watcher, StatCallback, ZKConstants {
     /**
      * The existence status of the node has changed.
      */
-    void exists(String path, byte data[]);
+    void exists(String path, String data);
 
     /**
      * The ZooKeeper session is no longer valid.
@@ -128,10 +132,11 @@ public class DataMonitor implements Watcher, StatCallback, ZKConstants {
 
     if (exists) {
       String d = zk.getData(path);
+      String prevData = prevPathDataMap.get(path);
       if ((d == null && d != prevData) || (d != null && !d.equals(prevData))) {
         logger.info(String.format("Calling listener for node data change {node=[%s], data=[%s]}", path, d));
-        listener.exists(path, d.getBytes());
-        prevData = d;
+        listener.exists(path, d);
+        prevPathDataMap.put(path, d);
       }
     }
   }

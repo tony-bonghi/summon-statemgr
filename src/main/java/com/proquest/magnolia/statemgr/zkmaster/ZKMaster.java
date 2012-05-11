@@ -74,15 +74,22 @@ public class ZKMaster extends ZKClientBase implements ZKConstants {
     for (Map.Entry<Object,Object> entry : nodeCfg.entrySet()) {
       String node = (String) entry.getKey();
       String desc = (String) entry.getValue();
-      setData(node, "");
+
       setData(node + NODE_DESCRIPTION, desc);
+
+      // If mode start, initialize all node data
       if (startMode.equals(MASTER_STATE_START)) {
         setData(node + NODE_STATE, STATE_IDLE);
         setData(node + NODE_STATE_INFO, "");
         setData(node + NODE_TIME_START, "");
         setData(node + NODE_TIME_END, "");
+
+      // If mode continue, only setup the node state to idle and only if it previously didn't succeed
       } else if (startMode.equals(MASTER_STATE_CONTINUE)) {
-        setData(node + NODE_STATE, STATE_IDLE);
+        String data = getData(node + NODE_STATE);
+        if (!STATE_SUCCESS.equals(data)) {
+          setData(node + NODE_STATE, STATE_IDLE);
+        }
       }
 
       // Setup a watch on the nodes
@@ -92,13 +99,16 @@ public class ZKMaster extends ZKClientBase implements ZKConstants {
     // Create the master the master node and initialize
     if (!startMode.equals(MASTER_STATE_STOP)) {
       setData(NODE_MASTER, MASTER_STATE_START);
-    }
 
-    byte[] b = new byte[80];
-    while (System.in.read(b) > 0) {
-      String d = new String(b);
-      if (d.startsWith("quit")) {
-        break;
+      // Wait for the user to type quit
+      System.out.println("Type quit to stop processing.");
+      byte[] b = new byte[80];
+      while (System.in.read(b) > 0) {
+        String d = new String(b);
+        if (d.startsWith("quit")) {
+          setData(NODE_MASTER, MASTER_STATE_STOP);
+          break;
+        }
       }
     }
   }

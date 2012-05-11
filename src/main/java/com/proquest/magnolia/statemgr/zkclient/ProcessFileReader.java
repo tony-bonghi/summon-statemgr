@@ -103,8 +103,13 @@ public class ProcessFileReader {
           currProc.setNode(data);
           break;
         case DependencyNode:
-          currProc.setDependencyNode(data);
+        {
+          String[] dns = data.split(",");
+          for (String dn : dns) {
+            currProc.addDependencyNode(dn);
+          }
           break;
+        }
         case None:
           break;
       }

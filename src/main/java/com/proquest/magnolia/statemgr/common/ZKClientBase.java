@@ -25,7 +25,7 @@ public class ZKClientBase implements Watcher {
   private Set<Watcher> watchers = new HashSet<Watcher>();
 
   public ZKClientBase(String zkConnection) throws IOException {
-    this.zookeeper = new ZooKeeper(zkConnection, 30000, this);
+    this.zookeeper = new ZooKeeper(zkConnection, 60000, this);
   }
 
   /**

@@ -94,6 +94,7 @@ public class ZKMaster extends ZKClientBase implements ZKConstants {
 
       // Setup a watch on the nodes
       zookeeper.exists(node+NODE_STATE, this);
+      zookeeper.exists(node+NODE_STATE_INFO, this);
     }
 
     // Create the master the master node and initialize
@@ -123,25 +124,32 @@ public class ZKMaster extends ZKClientBase implements ZKConstants {
     if (!startMode.equalsIgnoreCase(MASTER_STATE_STOP)) {
       
       String path = event.getPath();
-      if (path != null && path.endsWith(NODE_STATE)) {
+      if (path != null && (path.endsWith(NODE_STATE) || path.endsWith(NODE_STATE_INFO))) {
         
-        String rootPath = path.substring(0, path.length() - NODE_STATE.length());
-
-        String desc = getData(rootPath + NODE_DESCRIPTION);
-        String state = getData(rootPath + NODE_STATE);
-        String stateInfo = getData(rootPath + NODE_STATE_INFO);
-
-        String logStr = "";
-        if (stateInfo.length() > 0) {
-          logStr = String.format("[%s] %s (%s : %s)", rootPath, desc, state, stateInfo);
-        } else {
-          logStr = String.format("[%s] %s (%s)", rootPath, desc, state);
+        String rootPath = "";
+        if (path.endsWith(NODE_STATE)) {
+          rootPath = path.substring(0, path.length() - NODE_STATE.length());
+        } else if (path.endsWith(NODE_STATE_INFO)) {
+          rootPath = path.substring(0, path.length() - NODE_STATE_INFO.length());
         }
 
-        if (state.equals(STATE_ERROR)) {
-          logger.error(logStr);
-        } else {
-          logger.info(logStr);
+        String state = getData(rootPath + NODE_STATE);
+        if (state.length() > 0) {
+          String desc = getData(rootPath + NODE_DESCRIPTION);
+          String stateInfo = getData(rootPath + NODE_STATE_INFO);
+
+          String logStr = "";
+          if (stateInfo.length() > 0) {
+            logStr = String.format("[%s] %s (%s : %s)", rootPath, desc, state, stateInfo);
+          } else {
+            logStr = String.format("[%s] %s (%s)", rootPath, desc, state);
+          }
+
+          if (state.equals(STATE_ERROR)) {
+            logger.error(logStr);
+          } else {
+            logger.info(logStr);
+          }
         }
       }
     }

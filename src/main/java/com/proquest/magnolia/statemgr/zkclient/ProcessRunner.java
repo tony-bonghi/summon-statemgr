@@ -113,9 +113,9 @@ public class ProcessRunner implements Runnable, ZKConstants {
    * Buffers the log information output by the specified process.
    * This information is written out to the stateInfo node.
    */
-  static class StreamWriter extends Thread {
+  class StreamWriter extends Thread {
     InputStream is = null;
-    StringBuilder buffer = new StringBuilder();
+    StringBuilder buffer = new StringBuilder("");
 
     StreamWriter(InputStream is) {
       this.is = is;
@@ -123,15 +123,30 @@ public class ProcessRunner implements Runnable, ZKConstants {
     }
 
     public String getOutput() {
-      return buffer.toString();
+      String output = buffer.toString();
+      if (output.startsWith("mes\n")) {
+        output = "";
+      }
+      return output;
     }
     
     public void run() {
       byte b[] = new byte[80];
-      int rc;
       try {
-        while ((rc = is.read(b)) > 0) {
+        while (is.read(b) != -1) {
           buffer.append(new String(b));
+          
+          int i = 0;
+          while ((i=buffer.indexOf("\n")) != -1) {
+            String line = buffer.substring(0, i);
+            try {
+              if (!line.equals("mes")) {
+                zk.setData(zkProc.getSubNode(NODE_STATE_INFO), line);
+              }
+              buffer.delete(0, i+1);
+            } catch (Exception e) {
+            }
+          }
         }
       } catch (IOException e) {
       }
